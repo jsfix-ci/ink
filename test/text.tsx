@@ -1,3 +1,4 @@
+import { convert } from 'color-convert';
 import React from 'react';
 import test from 'ava';
 import chalk from 'chalk';
@@ -42,22 +43,22 @@ test('text with rgb color', t => {
 
 test('text with hsl color', t => {
 	const output = renderToString(<Text color="hsl(32, 100, 50)">Test</Text>);
-	t.is(output, chalk.hsl(32, 100, 50)('Test'));
+	t.is(output, chalk.rgb(...convert.hsl.rgb(32, 100, 50))('Test'));
 });
 
 test('text with hsv color', t => {
 	const output = renderToString(<Text color="hsv(32, 100, 100)">Test</Text>);
-	t.is(output, chalk.hsv(32, 100, 100)('Test'));
+	t.is(output, chalk.rgb(...convert.hsv.rgb(32, 100, 100))('Test'));
 });
 
 test('text with hwb color', t => {
 	const output = renderToString(<Text color="hwb(32, 0, 50)">Test</Text>);
-	t.is(output, chalk.hwb(32, 0, 50)('Test'));
+	t.is(output, chalk.rgb(...convert.hwb.rgb(32, 0, 50))('Test'));
 });
 
 test('text with ansi color', t => {
 	const output = renderToString(<Text color="ansi(31)">Test</Text>);
-	t.is(output, chalk.ansi(31)('Test'));
+	t.is(output, chalk.rgb(...convert.ansi.rgb(31))('Test'));
 });
 
 test('text with ansi256 color', t => {
